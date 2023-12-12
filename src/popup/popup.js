@@ -3,17 +3,19 @@ console.info("_sample【popup】boot");
 
 Office.onReady(() => {});
 
+const g = getGlobal();
+
 function closeDialog(val) {
   console.info("_sample【popup】sendMessage", val)
-  window.close()
+  //g.close()
 }
 
-window.onbeforeunload = () => {
-  window.opener[window.name](this.sendFlag)
-  self.close()
+g.onbeforeunload = () => {
+  g.opener[window.name](true)
+  //g.close()
 },
-window.addEventListener('message', (event) => {
-  if (event.origin === window.location.origin) {
+g.addEventListener('message', (event) => {
+  if (event.origin === g.location.origin) {
     console.log(event.data)
   }
 },false)
@@ -27,8 +29,6 @@ function getGlobal() {
     ? global
     : undefined;
 }
-
-const g = getGlobal();
 
 // The add-in command functions need to be available in global scope
 g.closeDialog = closeDialog;
