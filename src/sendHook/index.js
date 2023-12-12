@@ -2,6 +2,7 @@
 console.info("_sample【index】boot");
 
 Office.onReady(() => {})
+
 const g = getGlobal();
 
 function onSend(event) {
@@ -9,7 +10,7 @@ function onSend(event) {
   const wSize = 1250
   const hSize = 650
   let callbackId = 'ID'
-  let dialog = g.open('https://localhost:3000/popup.html',callbackId,'width=' + wSize + ',height=' + hSize)
+  let dialog = g.open('https://localhost:3000/popup.html'+`?${new Date().getTime()}`,callbackId,'width=' + wSize + ',height=' + hSize)
   if (dialog) {
     g.addEventListener('message', () => {
       dialog.onload = () => {
